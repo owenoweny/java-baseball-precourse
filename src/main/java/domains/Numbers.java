@@ -1,5 +1,7 @@
 package domains;
 
+import exceptions.BaseballException;
+
 import java.util.*;
 
 public class Numbers {
@@ -14,7 +16,7 @@ public class Numbers {
 
     private void validateSize(List<Integer> numbers) {
         if (numbers.size() != 3) {
-            throw new RuntimeException("세 개의 숫자여야합니다.");
+            throw new BaseballException("세 개의 숫자여야합니다.");
         }
     }
 
@@ -70,7 +72,7 @@ public class Numbers {
     private void validateNumberRange(List<Integer> numbers) {
         for (Integer number : numbers) {
             if (number > 9 || number < 1) {
-                throw new RuntimeException("1에서 9 사이의 숫자가 아닙니다.");
+                throw new BaseballException("1에서 9 사이의 숫자가 아닙니다.");
             }
         }
     }
@@ -79,7 +81,7 @@ public class Numbers {
         Set<Integer> set = new HashSet<>(numbers);
 
         if (set.size() != numbers.size()) {
-            throw new RuntimeException("중복된 숫자가 존재합니다.");
+            throw new BaseballException("중복된 숫자가 존재합니다.");
         }
     }
 }

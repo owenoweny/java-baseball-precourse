@@ -2,6 +2,7 @@ import domains.BaseballGame;
 import domains.Numbers;
 import domains.RestartCommand;
 import domains.Score;
+import exceptions.BaseballException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,10 +57,15 @@ public class BaseballApp {
     }
 
     private List<Integer> parsePitchInput(String pitchInput) {
-        List<Integer> result = new ArrayList<>();
-        String[] a = pitchInput.split("");
-        for (String s : a) {
-            result.add(Integer.parseInt(s));
+        List<Integer> result;
+        try {
+            result = new ArrayList<>();
+            String[] a = pitchInput.split("");
+            for (String s : a) {
+                result.add(Integer.parseInt(s));
+            }
+        } catch (NumberFormatException e) {
+            throw new BaseballException("숫자 형태의 입력이어야합니다.");
         }
 
         return result;
@@ -69,8 +75,7 @@ public class BaseballApp {
         while (true) {
             try {
                 return supplier.get();
-            //TODO : 커스텀 예외 선언 후 처리하도록 변경
-            } catch (Exception e) {
+            } catch (BaseballException e) {
                 baseballView.printErrorMessage(e.getMessage());
             }
         }

@@ -1,5 +1,7 @@
 package domains;
 
+import exceptions.BaseballException;
+
 public enum RestartCommand {
     RESTART("1"), END("2");
 
@@ -20,6 +22,6 @@ public enum RestartCommand {
             }
         }
 
-        throw new RuntimeException("재시작 명령어는 1 또는 2여야합니다.");
+        throw new BaseballException("재시작 명령어는 1 또는 2여야합니다.");
     }
 }
