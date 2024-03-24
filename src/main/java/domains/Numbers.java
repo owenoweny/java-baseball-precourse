@@ -14,12 +14,6 @@ public class Numbers {
         this.numbers = numbers;
     }
 
-    private void validateSize(List<Integer> numbers) {
-        if (numbers.size() != 3) {
-            throw new BaseballException("세 개의 숫자여야합니다.");
-        }
-    }
-
     public static Numbers getRandomNumbers() {
         List<Integer> numbers = new ArrayList<>();
 
@@ -42,6 +36,7 @@ public class Numbers {
     }
 
     //TODO : rename
+
     public Score scoreOf(Numbers pitchNumbers) {
         Integer ball = 0;
         Integer strike = 0;
@@ -64,7 +59,6 @@ public class Numbers {
         }
         return 0;
     }
-
     public Integer find(int index) {
         return numbers.get(index);
     }
@@ -72,7 +66,7 @@ public class Numbers {
     private void validateNumberRange(List<Integer> numbers) {
         for (Integer number : numbers) {
             if (number > 9 || number < 1) {
-                throw new BaseballException("1에서 9 사이의 숫자가 아닙니다.");
+                throw new BaseballException("1에서 9 사이의 숫자여야합니다.");
             }
         }
     }
@@ -81,7 +75,13 @@ public class Numbers {
         Set<Integer> set = new HashSet<>(numbers);
 
         if (set.size() != numbers.size()) {
-            throw new BaseballException("중복된 숫자가 존재합니다.");
+            throw new BaseballException("중복은 허용되지 않습니다.");
+        }
+    }
+
+    private void validateSize(List<Integer> numbers) {
+        if (numbers.size() != 3) {
+            throw new BaseballException("세 개의 숫자여야합니다.");
         }
     }
 }
