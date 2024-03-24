@@ -22,23 +22,24 @@ public class BaseballApp {
 
     public void run() {
         baseballGame.initialize();
-
         while (true) {
-            Score score = requestRepeatedly(this::getScore);
-
-            baseballView.printScore(score);
-
-            if (score.isCompleted()) {
-                baseballView.printCompleteMessage();
-                RestartCommand restartCommand = requestRepeatedly(this::getRestartCommand);
-
-                if (restartCommand.equals(RestartCommand.END)) {
-                    baseballView.printExitMessage();
-                    break;
-                }
-                baseballGame.initialize();
-            }
+            if (processTurn()) break;
         }
+    }
+
+    private boolean processTurn() {
+        Score score = requestRepeatedly(this::getScore);
+        baseballView.printScore(score);
+        if (score.isCompleted()) {
+            baseballView.printCompleteMessage();
+            RestartCommand restartCommand = requestRepeatedly(this::getRestartCommand);
+            if (restartCommand.equals(RestartCommand.END)) {
+                baseballView.printExitMessage();
+                return true;
+            }
+            baseballGame.initialize();
+        }
+        return false;
     }
 
     private Score getScore() {
