@@ -29,6 +29,7 @@ public class BaseballApp {
             baseballView.printScore(score);
 
             if (score.isCompleted()) {
+                baseballView.printCompleteMessage();
                 RestartCommand restartCommand = requestRepeatedly(this::getRestartCommand);
 
                 if (restartCommand.equals(RestartCommand.END)) {
@@ -50,7 +51,7 @@ public class BaseballApp {
     }
 
     private RestartCommand getRestartCommand() {
-        baseballView.printCompleteMessage();
+        baseballView.printRestartInputMessage();
         String restartInput = scanner.nextLine();
         RestartCommand restartCommand = RestartCommand.of(restartInput);
         return restartCommand;
