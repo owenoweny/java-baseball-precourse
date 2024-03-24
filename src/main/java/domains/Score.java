@@ -1,5 +1,7 @@
 package domains;
 
+import java.util.Objects;
+
 public class Score {
     private final Integer strike;
     private final Integer ball;
@@ -19,5 +21,18 @@ public class Score {
 
     public Integer getBall() {
         return ball;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Score score = (Score) o;
+        return Objects.equals(strike, score.strike) && Objects.equals(ball, score.ball);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(strike, ball);
     }
 }
